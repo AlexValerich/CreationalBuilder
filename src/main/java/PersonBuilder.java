@@ -1,20 +1,20 @@
 public class PersonBuilder {
 
 
-
-    protected  String name;
+    protected String name;
     protected String surname;
     protected Integer age;
     protected String address;
     private Person newPerson;
 
 
-    public PersonBuilder(){
-        newPerson = new Person(name,surname);
+    public PersonBuilder() {
+        newPerson = new Person(name, surname);
 
     }
+
     public PersonBuilder setName(String name) {
-        newPerson.name=name;
+        newPerson.name = name;
         return this;
     }
 
@@ -34,11 +34,12 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        if(newPerson.name==null||newPerson.surname==null)
+        if (newPerson.name == null || newPerson.surname == null)
             throw new IllegalStateException("обязательно указать имя и фамилию");
         else {
-            if (newPerson.getAge()!=null&&newPerson.age < 0)
+            if (newPerson.getAge() != null && newPerson.age < 0)
                 throw new IllegalArgumentException("Возраст не может быть отрицательным");
         }
-            return newPerson; }
+        return newPerson;
+    }
 }
