@@ -1,8 +1,27 @@
 public class Person {
-    private String name;
-    private String surname;
-    private int age;
-    private String city;
+    protected String name;
+    protected String surname;
+    protected Integer age = null;
+    protected String address;
+
+    public Person(String name, String surname) {
+
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Person(String name, String surname, Integer age, String address) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.address = address;
+    }
+
+    public Person(String name, String surname, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
 
     public String getName() {
         return name;
@@ -12,40 +31,45 @@ public class Person {
         return surname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public String getCity() {
-        return city;
+    public String getAddress() {
+        return address;
     }
-public static class PersonBuilder{
-        private Person newPerson;
 
-        public PersonBuilder(){
-            newPerson = new Person();
-        }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-        public PersonBuilder withName(String name){
-            newPerson.name = name;
-            return this;
-        }
+    public void happyBirthday() {
+        if (age != null)
+            age++;
+    }
 
-    public PersonBuilder withSurname(String surname){
-        newPerson.surname = surname;
-        return this;
+    public boolean hasAge() {
+        if (age == null) {
+            return false;
+        } else
+            return true;
     }
-        public PersonBuilder withAge(int age){
-        newPerson.age = age;
-        return this;
-    }
-    public PersonBuilder withCity(String city){
-        newPerson.city = city;
-        return this;
-    }
-    public Person build(){
-        return newPerson;
-    }
-}
 
+    public boolean hasAddress() {
+        if (address == null) {
+            return false;
+        } else
+            return true;
+
+    }
+
+    public PersonBuilder newChildBuilder() {
+        PersonBuilder newChild = new PersonBuilder().setSurname(this.surname).setAddress(this.address).setAge(0);
+        return newChild;
+    }
+
+    @Override
+    public String toString() {
+        return  name + " " + surname;
+    }
 }
